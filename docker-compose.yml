@@ -8,7 +8,7 @@ x-nginx-cmn: &nginx-cmn
 services:
   app:
     build:
-      context: ./app/.docker/app
+      context: ./api/.docker/app/
       dockerfile: Dockerfile
     container_name: laravel_app
     restart: unless-stopped
@@ -39,7 +39,7 @@ services:
 
   web:
     build:
-      context: ./web/.docker/app
+      context: ./web/.docker/web/
       dockerfile: Dockerfile
     container_name: react_app
     restart: unless-stopped
