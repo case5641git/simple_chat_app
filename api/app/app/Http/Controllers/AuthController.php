@@ -22,8 +22,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
-        return back()->withErros([
-            'email' => 'メールアドレスもしくはパスワードが違います。',
+        return back()->withErrors([
+            'email' => '正しいメールアドレスを入力してください。',
+            'password' => '正しいパスワードを入力してください。',
         ]);
     }
 }
