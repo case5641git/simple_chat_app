@@ -34,19 +34,11 @@
 
 ### Format
 
-:emoji: #タスク番号 変更内容  
-例) :memo: #001 コメント変更
+tags: #タスク番号 変更内容  
+例) refactor: #001 コメント変更
 
-### Emojis
+### Tags
 
-:tada: 初めてのコミット（Initial Commit）  
-:memo: コメント変更（Change Comennt）  
-:sparkles: 新機能（New Feature）  
-:bug: バグ修正（Bagfix）  
-:recycle: リファクタリング(Refactoring)  
-:books: ドキュメント（Documentation）  
-:art: デザイン UI/UX(Accessibility)  
-:wrench: ツール（Tooling）  
-:rotating_light: テスト（Tests）  
-:wastebasket: 削除（Removal）  
-:construction: WIP(Work In Progress)
+feature:機能追加・更新  
+refactor:リファクタリング・コードスタイル・コードフォーマット修正など  
+fix:バグ修正
