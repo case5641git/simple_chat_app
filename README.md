@@ -39,14 +39,14 @@
 
 ### Emojis
 
-🎉 :tada: 初めてのコミット（Initial Commit）
-🔖 :memo: コメント変更（Change Comennt）
-✨ :sparkles: 新機能（New Feature）
-🐛 :bug: バグ修正（Bagfix）
-♻️ :recycle: リファクタリング(Refactoring)
-📚 :books: ドキュメント（Documentation）
-🎨 :art: デザイン UI/UX(Accessibility)
-🔧 :wrench: ツール（Tooling）
-🚨 :rotating_light: テスト（Tests）
-🗑️ :wastebasket: 削除（Removal）
-🚧 :construction: WIP(Work In Progress)
+:tada: 初めてのコミット（Initial Commit）  
+:memo: コメント変更（Change Comennt）  
+:sparkles: 新機能（New Feature）  
+:bug: バグ修正（Bagfix）  
+:recycle: リファクタリング(Refactoring)  
+:books: ドキュメント（Documentation）  
+:art: デザイン UI/UX(Accessibility)  
+:wrench: ツール（Tooling）  
+:rotating_light: テスト（Tests）  
+:wastebasket: 削除（Removal）  
+:construction: WIP(Work In Progress)
