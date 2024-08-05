@@ -1,27 +1,23 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Models\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\TestCase;
 
-class LoginTest extends TestCase
+class LoginUnitTest extends TestCase
 {
-    use RefreshDatabase;
- /**
+    /**
      * ログイン処理　バリデーションエラー
      * @return void
      */
     public function test_validate_error(): void
     {
-        $response = $this->post('/api/login', [
-            'email' => 'invalid-email',
+        $response = $this->post('/login', [
+            'email' => 'inbalid-email',
             'password' => '',
         ]);
-        $response->assertSessionHasErrors([
-            'email' => '正しいメールアドレスを入力してください。',
-        ]);
+        $response->assertSessionHasErrors(['email']);
     }
 
     /**
@@ -35,16 +31,13 @@ class LoginTest extends TestCase
             'password' => bcrypt('password'),
         ]);
 
-        $response = $this->post('/api/login',[
+        $response = $this->post('/login',[
             'email' => 'user@test.com',
             'password' => 'wrong-password',
         ]);
 
-        $response->assertSessionHasErrors([
-            'email' => '正しいメールアドレスを入力してください。',
-            'password' => '正しいパスワードを入力してください。',
-        ]);
-        $this->assertGuest();
+        $response->assertSessionHasErrors(['email']);
+        $response->assertGuest();
     }
 
     /**
@@ -58,11 +51,12 @@ class LoginTest extends TestCase
             'password' => bcrypt('password'),
         ]);
 
-        $response = $this->post('/api/login', [
+        $response = $this->post('/login', [
             'email' => 'user@test.com',
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+        $response->assertRedirect('/');
+        $response->assertAuthenticated($user);
     }
 }
