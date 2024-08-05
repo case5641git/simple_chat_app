@@ -27,4 +27,17 @@ class AuthController extends Controller
             'password' => '正しいパスワードを入力してください。',
         ]);
     }
+
+    /**
+     * ログアウト処理
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
 }
