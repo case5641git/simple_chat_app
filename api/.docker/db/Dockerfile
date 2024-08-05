@@ -2,7 +2,7 @@ FROM mysql:8.0.29-debian
  
 # 設定ファイルの上書き
 COPY ./api/.docker/db/my.cnf /etc/mysql/conf.d
-RUN chmod 644 /etc/mysql/conf.d
+RUN chmod 644 /etc/mysql/conf.d/my.cnf
  
 RUN mv /etc/apt/sources.list.d/mysql.list /etc/apt/sources.list.d/mysql.list.disabled
 RUN apt-get update && apt-get install -y curl gnupg && apt-get clean
