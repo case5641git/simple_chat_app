@@ -23,9 +23,30 @@
 
 `docker-compose exec web sh`を実行して、コンテナ内に入り、以下のコマンドを実行  
 `npm install`依存パッケージの install  
-`npm start`React を起動
+`npm start`React を起動  
 `http://localhost:3000`にアクセスして React の画面が表示されるか確認
 
 ## トラブルシューティング
 
 随時更新
+
+## Commit Messages
+
+### Format
+
+:emoji: #タスク番号 変更内容  
+例) :memo: #001 コメント変更
+
+### Emojis
+
+🎉 :tada: 初めてのコミット（Initial Commit）
+🔖 :memo: コメント変更（Change Comennt）
+✨ :sparkles: 新機能（New Feature）
+🐛 :bug: バグ修正（Bagfix）
+♻️ :recycle: リファクタリング(Refactoring)
+📚 :books: ドキュメント（Documentation）
+🎨 :art: デザイン UI/UX(Accessibility)
+🔧 :wrench: ツール（Tooling）
+🚨 :rotating_light: テスト（Tests）
+🗑️ :wastebasket: 削除（Removal）
+🚧 :construction: WIP(Work In Progress)
