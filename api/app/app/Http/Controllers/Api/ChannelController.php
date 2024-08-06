@@ -74,6 +74,12 @@ class ChannelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $channel = Channel::find($id);
+            $channel->delete();
+            return response()->json(['message' => 'チャンネルを削除しました。'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'チャンネルの削除に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
