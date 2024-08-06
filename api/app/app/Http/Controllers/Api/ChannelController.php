@@ -7,21 +7,30 @@ use Illuminate\Http\Request;
 use App\Models\Channel;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\JsonResponse;
 
 class ChannelController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        try {
+            $channels = Channel::all();
+            return response()->json($channels, Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'チャンネルの取得に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try {
             $user = Auth::user();
@@ -41,17 +50,12 @@ class ChannelController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
+     * @param Request $request
+     * @param string $id
+     * @return JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id):JsonResponse
     {
         try {
             $credentials = $request->validate([
@@ -71,8 +75,10 @@ class ChannelController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param strin $id
+     * @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         try {
             $channel = Channel::find($id);
