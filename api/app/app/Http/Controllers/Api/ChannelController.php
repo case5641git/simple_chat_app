@@ -53,7 +53,20 @@ class ChannelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $credentials = $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+            $channel = Channel::find($id);
+            $channel->name = $credentials['name'];
+            $channel->save();
+
+            return response()->json(['message' => 'チャンネルを更新しました。'], Response::HTTP_OK);
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'チャンネルの更新に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
     }
 
     /**
