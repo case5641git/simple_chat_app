@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -38,6 +40,26 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
+
+    /**
+     * 新規登録処理
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function register(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        try {
+            User::create($credentials);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'ユーザー登録に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }        
         return redirect()->route('login');
     }
 }

@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Session\Middleware\StartSession;
 
 class LoginTest extends TestCase
 {
