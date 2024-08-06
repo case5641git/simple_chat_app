@@ -19,8 +19,8 @@ class MessageController extends Controller
     {
         try {
             $request->validate([
-                'user_id' => 'required',
-                'message' => 'required',
+                'user_id' => 'required|exists:users,id',
+                'message' => 'required|string|max:255',
             ]);
             $message = new Message();
             $message->user_id = $request->user_id;
@@ -38,7 +38,7 @@ class MessageController extends Controller
     /**
      * チャンネルメッセージ取得処理
      */
-    public function show_channnel_messages(string $id)
+    public function show_channel_messages(string $id)
     {
         try {
             $messages = Message::find($id);
