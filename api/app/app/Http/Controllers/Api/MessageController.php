@@ -54,6 +54,12 @@ class MessageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $message = Message::find($id);
+            $message->delete();
+            return resposne()->json(['message' => 'メッセージを削除しました。'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'メッセージの削除に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
