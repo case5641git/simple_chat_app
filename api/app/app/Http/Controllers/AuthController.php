@@ -56,7 +56,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         try {
-            $user = User::create($credentials);
+            User::create($credentials);
         } catch (\Exception $e) {
             return response()->json(['message' => 'ユーザー登録に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }        
