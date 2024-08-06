@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
@@ -46,9 +47,9 @@ class AuthController extends Controller
     /**
      * 新規登録処理
      * @param Request $request
-     * @return RedirectResponse
+     * @return RedirectResponse|JsonResponse
      */
-    public function register(Request $request): RedirectResponse
+    public function register(Request $request): RedirectResponse|JsonResponse
     {
         $credentials = $request->validate([
             'name' => 'required',
@@ -61,5 +62,21 @@ class AuthController extends Controller
             return response()->json(['message' => 'ユーザー登録に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }        
         return redirect()->route('login');
+    }
+
+    /**
+     * 退会処理
+     * @param Request $request
+     * @return RedirectResponse|JsonResponse
+     */
+    public function delete(Request $request): RedirectResponse|JsonResponse
+    {
+        $user = Auth::user();
+        try {
+            $user->delete();
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'ユーザー削除に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return redirect()->route('register');
     }
 }
