@@ -55,15 +55,11 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        if (!$credentials) {
-            return response()->json(['message' => '値を入力してください'], Response::HTTP_BAD_REQUEST);
-        }
-
-        $user = User::create($credentials);
-        if (!$user) {
+        try {
+            $user = User::create($credentials);
+        } catch (\Exception $e) {
             return response()->json(['message' => 'ユーザー登録に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-        
+        }        
         return redirect()->route('login');
     }
 }
