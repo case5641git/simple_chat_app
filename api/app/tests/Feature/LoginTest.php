@@ -5,11 +5,14 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Session\Middleware\StartSession;
 
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
- /**
+
+
+    /**
      * ログイン処理　バリデーションエラー
      * @return void
      */
@@ -30,6 +33,7 @@ class LoginTest extends TestCase
      */
     public function test_login_error():void
     {
+        /** @var User $user */
         $user = User::factory()->create([
             'email' => 'user@test.com',
             'password' => bcrypt('password'),
@@ -53,6 +57,8 @@ class LoginTest extends TestCase
      */
     public function test_login_success(): void
     {
+        $this->withoutExceptionHandling();
+        /** @var User $user */
         $user = User::factory()->create([
             'email' => 'user@test.com',
             'password' => bcrypt('password'),
@@ -63,6 +69,23 @@ class LoginTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+        $this->assertAuthenticated($user);
+    }
+
+    /**
+     * ログアウト処理
+     * @return void
+     * 
+     */
+    public function test_logout(): void
+    {
+        /** @var User $user */
+        $user = User::factory()->create([
+            'email' => 'user@test.com',
+            'password' => bcrypt('password'),
+        ]);
+        $response = $this->actingAs($user)->post('/api/logout');
+        $response->assertStatus(200);
+        $this->assertGuest();
     }
 }
