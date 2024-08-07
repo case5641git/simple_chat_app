@@ -32,4 +32,22 @@ class Channel extends Model
             throw $e;
         }
     }
+
+    /**
+     * チャンネルを更新する
+     * @param string $name
+     * @param int $id
+     * @return mixed
+     */
+    public static function updateChannel(string $name, int $id): mixed
+    {
+        try {
+            $channel = self::find($id);
+            $channel->name = $name;
+            $result = $channel->save();
+            return $result;
+        } catch (\Exception $e){
+            Log::error('Error updating channel:' . $e->getMessage());
+        }
+    }
 }
