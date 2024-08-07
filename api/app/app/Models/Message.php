@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Message extends Model
 {
@@ -25,6 +26,11 @@ class Message extends Model
      */
     public static function createMessage(array $data):mixed
     {
-        return self::create($data);
+        try {
+            return self::create($data);
+        } catch (\Exception $e) {
+            Log::error("Error creating message:" . $e->getMessage());
+            throw $e;
+        }
     }
 }
