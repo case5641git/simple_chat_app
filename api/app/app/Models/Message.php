@@ -29,7 +29,7 @@ class Message extends Model
         try {
             return self::create($data);
         } catch (\Exception $e) {
-            Log::error("Error creatting message:" . $e->getMessage());
+            Log::error("Error creating message:" . $e->getMessage());
             throw $e;
         }
     }
