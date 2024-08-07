@@ -34,14 +34,10 @@ class ChannelController extends Controller
     {
         try {
             $user = Auth::user();
-            $channel = new Channel();
             $credentials = $request->validate([
                 'name' => 'required|string|max:255',
             ]);
-            $channel->name = $credentials['name'];
-            $channel->user_id = $user->id;
-            $channel->save();
-
+            Channel::createChannel($credentials['name'], $user->id);
             return response()->json(['message' => 'チャンネルを作成しました。'], Response::HTTP_OK);
 
         } catch (\Exception $e) {
