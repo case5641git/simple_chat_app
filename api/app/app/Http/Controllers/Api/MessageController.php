@@ -22,12 +22,7 @@ class MessageController extends Controller
                 'user_id' => 'required|exists:users,id',
                 'message' => 'required|string|max:255',
             ]);
-            $message = new Message();
-            $message->user_id = $request->user_id;
-            $message->channel_id = $request->channel_id;
-            $message->privatechat_id = $request->privatechat_id;
-            $message->message = $request->message;
-            $message->save();
+            Message::createMessage($request->only(['user_id', 'message', 'channel_id','privatechat_id']));
             return response()->json(['message' => 'メッセージを送信しました。'], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json(['message' => 'メッセージの送信に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
