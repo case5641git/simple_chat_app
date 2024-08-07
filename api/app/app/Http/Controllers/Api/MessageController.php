@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ChatCreated;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Message;
-
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -18,11 +19,12 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->validate([
-                'user_id' => 'required|exists:users,id',
+            $credentials = $request->validate([
                 'message' => 'required|string|max:255',
             ]);
-            Message::createMessage($request->only(['user_id', 'message', 'channel_id','privatechat_id']));
+            $user_id = Auth::id();
+            Message::createMessage($user_id, $credentials['message']);
+            broadcast(new ChatCreated($credentials['message']))->toOthers();
             return response()->json(['message' => 'メッセージを送信しました。'], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json(['message' => 'メッセージの送信に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
