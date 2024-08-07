@@ -17,8 +17,9 @@ class ChatCreated implements ShouldBroadcast
     public string $message;
     /**
      * Create a new event instance.
+     *@param string $message
      */
-    public function __construct($message)
+    public function __construct(string $message)
     {
         $this->message = $message;
     }
