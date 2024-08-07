@@ -8,6 +8,7 @@ use App\Models\Channel;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class ChannelController extends Controller
 {
@@ -41,6 +42,7 @@ class ChannelController extends Controller
             return response()->json(['message' => 'チャンネルを作成しました。'], Response::HTTP_OK);
 
         } catch (\Exception $e) {
+            Log::error('Error creating channel: '. $e->getMessage());
             return response()->json(['message'=>'チャンネルの作成に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
