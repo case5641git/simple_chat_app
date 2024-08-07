@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Channel extends Model
 {
@@ -21,9 +22,14 @@ class Channel extends Model
      */
     public static function createChannel(string $name, int $id): mixed
     {
-        return self::create([
-            'name' => $name,
-            'user_id' => $id,
-        ]);
+        try {
+            return self::create([
+                'name' => $name,
+                'user_id' => $id,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error creating channel: '. $e->getMessage());
+            throw $e;
+        }
     }
 }
