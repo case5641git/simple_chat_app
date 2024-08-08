@@ -24,7 +24,7 @@ class MessageController extends Controller
                 'message' => 'required|string|max:255',
             ]);
             Message::createMessage($credentials['user_id'], $credentials['message']);
-            broadcast(new ChatCreated($credentials['message']))->toOthers();
+            $result = broadcast(new ChatCreated($credentials['message']))->toOthers();
             return response()->json(['message' => 'メッセージを送信しました。'], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json(['message' => 'メッセージの送信に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
