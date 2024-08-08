@@ -56,19 +56,18 @@ class LoginTest extends TestCase
      */
     public function test_login_success(): void
     {
-        $this->withoutExceptionHandling();
         /** @var User $user */
-        $user = User::factory()->create([
-            'email' => 'user@test.com',
-            'password' => bcrypt('password'),
-        ]);
+        $user = User::factory()->create();
+
+        $this->assertGuest();
 
         $response = $this->post('/api/login', [
-            'email' => 'user@test.com',
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated($user);
+        $this->assertAuthenticated();
+        $response->assertRedirect('/');
     }
 
     /**
@@ -79,12 +78,12 @@ class LoginTest extends TestCase
     public function test_logout(): void
     {
         /** @var User $user */
-        $user = User::factory()->create([
-            'email' => 'user@test.com',
-            'password' => bcrypt('password'),
-        ]);
-        $response = $this->actingAs($user)->post('/api/logout');
-        $response->assertStatus(200);
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $this->assertAuthenticated();
+        $response = $this->post('/api/logout');
         $this->assertGuest();
+        $response->assertRedirect('/api/login');
+        
     }
 }
