@@ -35,28 +35,28 @@ class MessageController extends Controller
     /**
      * チャンネルメッセージ取得処理
      */
-    public function show_channel_messages(string $id)
-    {
-        try {
-            $messages = Message::find($id);
-            return response()->json($messages, Response::HTTP_OK);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'メッセージの取得に失敗しまいた。'], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
+    // public function show_channel_messages(string $id)
+    // {
+    //     try {
+    //         $messages = Message::find($id);
+    //         return response()->json($messages, Response::HTTP_OK);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['message' => 'メッセージの取得に失敗しまいた。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+    //     }
+    // }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        try {
-            $message = Message::find($id);
-            $message->delete();
-            return resposne()->json(['message' => 'メッセージを削除しました。'], Response::HTTP_OK);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'メッセージの削除に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
+    // public function destroy(string $id)
+    // {
+    //     try {
+    //         $message = Message::find($id);
+    //         $message->delete();
+    //         return resposne()->json(['message' => 'メッセージを削除しました。'], Response::HTTP_OK);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['message' => 'メッセージの削除に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+    //     }
+    // }
 }
