@@ -20,10 +20,10 @@ class MessageController extends Controller
     {
         try {
             $credentials = $request->validate([
+                'user_id' => 'required|integer',
                 'message' => 'required|string|max:255',
             ]);
-            $user_id = Auth::id();
-            Message::createMessage($user_id, $credentials['message']);
+            Message::createMessage($credentials['user_id'], $credentials['message']);
             broadcast(new ChatCreated($credentials['message']))->toOthers();
             return response()->json(['message' => 'メッセージを送信しました。'], Response::HTTP_OK);
         } catch (\Exception $e) {

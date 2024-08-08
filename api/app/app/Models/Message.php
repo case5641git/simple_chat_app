@@ -10,6 +10,8 @@ class Message extends Model
 {
     use HasFactory;
 
+    protected $table = 'messages';
+
     /**
      * 操作を許可しないカラム
      *
@@ -24,10 +26,13 @@ class Message extends Model
      * @param array $data
      * @return mixed
      */
-    public static function createMessage(array $data):mixed
+    public static function createMessage(int $id, string $message):mixed
     {
         try {
-            return self::create($data);
+            return self::create([
+                'user_id' => $id,
+                'message' => $message,
+            ]);
         } catch (\Exception $e) {
             Log::error("Error creating message:" . $e->getMessage());
             throw $e;
