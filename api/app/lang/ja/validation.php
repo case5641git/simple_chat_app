@@ -117,6 +117,12 @@ return [
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute field format is invalid.',
     'numeric' => 'The :attribute field must be a number.',
+    'name' => [
+        'required' => '名前を入力してください。',
+        'string' => '名前は文字列で入力してください。',
+        'max' => '名前は255文字以内で入力してください。',
+        'unique' => 'この名前は既に使用されています。',
+    ],
     'password' => '正しいパスワードを入力してください。',
     'present' => 'The :attribute field must be present.',
     'present_if' => 'The :attribute field must be present when :other is :value.',

@@ -36,7 +36,7 @@ class ChannelController extends Controller
         try {
             $user = Auth::user();
             $credentials = $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:channels',
             ]);
             Channel::createChannel($credentials['name'], $user->id);
             return response()->json(['message' => 'チャンネルを作成しました。'], Response::HTTP_OK);

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\ChannelController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -16,3 +17,6 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/delete', [AuthController::class, 'delete'])->name('delete');
 
 Route::post('/messages', [MessageController::class, 'store']);
+
+
+Route::apiResource('channel', ChannelController::class);
