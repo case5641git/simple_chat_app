@@ -140,4 +140,18 @@ class LoginTest extends TestCase
         $response->assertStatus(Response::HTTP_FOUND);
         $response->assertRedirect('/api/login');
     }
+
+    /**
+     * 退会処理
+     * @return void
+     */
+    public function test_delete():void
+    {
+        $user = User::factory()->create();
+        /** @var User $user */
+        $this->actingAs($user);
+        $this->assertAuthenticated();
+        $response = $this->post('/api/delete');
+        $response->assertRedirect('/api/register');
+    }
 }
