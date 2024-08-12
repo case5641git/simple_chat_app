@@ -17,5 +17,3 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/delete', [AuthController::class, 'delete'])->name('delete');
 
 Route::post('/messages', [MessageController::class, 'store']);
-
-Route::apiResource('channel', ChannelController::class);
