@@ -48,6 +48,22 @@ class ChannelController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function show(string $id): JsonResponse
+    {
+        try {
+            $channel = Channel::find($id);
+            return response()->json($channel, Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'チャンネルの取得に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    /**
      * Update the specified resource in storage.
      * @param Request $request
      * @param string $id

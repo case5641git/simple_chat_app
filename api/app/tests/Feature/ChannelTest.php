@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Channel;
 
 class ChannelTest extends TestCase
 {
@@ -57,7 +58,7 @@ class ChannelTest extends TestCase
      * チャンネル作成
      * @return void
      */
-    public function test_channel_creation(): void
+    public function test_channel_create(): void
     {
         $user = User::factory()->create();
         /** @var User $user */
@@ -68,5 +69,31 @@ class ChannelTest extends TestCase
         ]);
         $response->assertStatus(200);
         $response->assertJson(['message' => 'チャンネルを作成しました。']);
+    }
+
+    /**
+     * チャンネル編集
+     * @return void
+     */
+    public function test_channel_update(): void
+    {
+        $user = User::factory()->create();
+        /** @var User $user */
+        $this->actingAs($user);
+        $this->assertAuthenticated();
+        $response = $this->post('/api/channel', [
+            'name' => 'test_channel',
+        ]);
+        $response->assertStatus(200);
+        $response->assertJson(['message' => 'チャンネルを作成しました。']);
+
+        $channel_id = Channel::where('name', 'test_channel')->first()->id;
+       
+        $response_update = $this->put('/api/channel/' . $channel_id,[
+            'name' => 'test_channel_update',
+            'id' => $channel_id
+        ]);
+        $response_update->assertStatus(200);
+        $response_update->assertJson(['message' => 'チャンネルを更新しました。']);
     }
 }
