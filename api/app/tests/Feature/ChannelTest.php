@@ -88,12 +88,47 @@ class ChannelTest extends TestCase
         $response->assertJson(['message' => 'チャンネルを作成しました。']);
 
         $channel_id = Channel::where('name', 'test_channel')->first()->id;
-       
         $response_update = $this->put('/api/channel/' . $channel_id,[
             'name' => 'test_channel_update',
             'id' => $channel_id
         ]);
         $response_update->assertStatus(200);
         $response_update->assertJson(['message' => 'チャンネルを更新しました。']);
+    }
+
+    /**
+     * チャンネル一覧取得
+     * @return void
+     */
+    public function test_channel_index(): void
+    {
+        $user = User::factory()->create();
+        /** @var User $user */
+        $this->actingAs($user);
+        $this->assertAuthenticated();
+        $response = $this->get('/api/channel');
+        $response->assertStatus(200);
+    }
+
+    /**
+     * チャンネル削除
+     * @return void
+     */
+    public function test_channel_delete(): void
+    {
+        $user = User::factory()->create();
+        /** @var User $user */
+        $this->actingAs($user);
+        $this->assertAuthenticated();
+        $response = $this->post('/api/channel', [
+            'name' => 'test_channel',
+        ]);
+        $response->assertStatus(200);
+        $response->assertJson(['message' => 'チャンネルを作成しました。']);
+
+        $channel_id = Channel::where('name', 'test_channel')->first()->id;
+
+        $response_delete = $this->delete('/api/channel/' . $channel_id);
+        $response_delete->assertStatus(200);
     }
 }
