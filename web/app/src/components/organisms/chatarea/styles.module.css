@@ -1,0 +1,18 @@
+.chatAreaWrapper {
+  width: calc(100% - 300px);
+}
+.chatAreaInner {
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+}
+
+.chatAreaNotice {
+  color: RGB(25, 25, 25);
+  font-size: 20px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+}

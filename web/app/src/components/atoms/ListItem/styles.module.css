@@ -1,0 +1,13 @@
+.listItem {
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listItem:hover {
+  background-color: RGB(60, 68, 223);
+  border-radius: 4px;
+}
