@@ -29,7 +29,6 @@
 
 .menu ul {
   width: 90%;
-  overflow-y: scroll;
   margin: 15px auto 0;
   overflow: auto;
 }
@@ -53,9 +52,6 @@
   width: 85%;
   margin: 0 0 20px calc((100% - 85%) / 2);
   background-color: RGB(17, 16, 100);
-  /* position: absolute;
-      bottom: 0;
-      z-index: 1; */
 }
 
 .link {

@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./styles.module.css";
 
 type EditButtonProps = {
-  onClick: () => void;
-  alt: string;
-  image: string;
+  onClick?: () => void;
+  alt?: string;
+  image?: string;
 };
 
 export const EditButton: React.FC<EditButtonProps> = ({
