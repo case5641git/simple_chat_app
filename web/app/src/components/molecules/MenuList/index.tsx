@@ -28,7 +28,7 @@ export const MenuList: React.FC<MenuListProps> = ({ onChangeId, onClick }) => {
       {items.map((item) => (
         <ListItem
           item={item.name}
-          itemId={item.id}
+          key={item.id}
           onClick={() => onChangeId(item.id)}
         />
       ))}
